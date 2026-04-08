@@ -81,7 +81,7 @@ int main(int argc, char** argv)
   std::string config_path;
 
 #ifdef RUN_IN_ROS_WORKSPACE
-   config_path = ros::package::getPath("inno_lidar_ros");
+   config_path = ros::package::getPath("inno_multi_lidar_ros");
 #else
    config_path = (std::string)PROJECT_PATH;
 

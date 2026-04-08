@@ -3,7 +3,7 @@ from launch_ros.actions import Node
 from ament_index_python.packages import get_package_share_directory
 import os
 def generate_launch_description():
-    package_name = 'inno_lidar_ros'
+    package_name = 'inno_multi_lidar_ros'
     rviz_config = 'rviz2.rviz'
 
     # 获取功能包路径
@@ -14,7 +14,7 @@ def generate_launch_description():
     print("RViz config path:", rviz_config_path)
     return LaunchDescription([
         Node(
-            package='inno_lidar_ros',
+            package='inno_multi_lidar_ros',
             executable='inno_lidar_node',
             name='inno_lidar_node'
         ),

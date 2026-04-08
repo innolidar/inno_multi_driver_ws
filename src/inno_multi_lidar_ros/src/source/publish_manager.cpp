@@ -131,13 +131,12 @@ public:
     }
     void Init(const YAML::Node& config)
     {
-        yamlRead<std::string>(config["common"],"ros_frame_id", m_frame_id, "innolidar");
+        yamlRead<std::string>(config,"ros_frame_id", m_frame_id, "innolidar");
         std::string ros_send_topic;
-        yamlRead<std::string>(config["common"],"ros_send_point_cloud_topic", ros_send_topic, "innolidar_points");
+        yamlRead<std::string>(config,"ros_send_point_cloud_topic", ros_send_topic, "innolidar_points");
         static int node_index = 0;
         std::stringstream node_name;
         node_name << "inno_points_destination_" << node_index++;
-        
 #if ROS_FOUND==1
         m_nh = std::unique_ptr<ros::NodeHandle>(new ros::NodeHandle());
         m_pub = m_nh->advertise<sensor_msgs::PointCloud2>(ros_send_topic, 100);

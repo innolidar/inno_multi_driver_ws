@@ -29,7 +29,7 @@ struct NodeManager::Impl
 
         YAML::Node lidar_config = yamlSubNodeAbort(config, "lidar");
         m_source_driver = std::make_shared<SourceDriver>();
-        m_source_driver->Init(SourceType::MSG_FROM_LIDAR,lidar_config);
+        m_source_driver->Init(SourceType::MSG_FROM_LIDAR,lidar_config,common_config);
     }
     void Start()
     {

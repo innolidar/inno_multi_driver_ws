@@ -18,7 +18,7 @@ lidar:
       max_distance: 200                         #Maximum distance of point cloud
       pcap_repeat: true                         #True--repeat play pcap file
       is_device_load_calibration: false          #True--Use the lidar check param from lidar device
-      calibrate_folder: /home/wenjie/Program/inno_sdk/inno_driver_ws/src/inno_lidar_ros/config/fw192sa #
+      calibrate_folder: /home/wenjie/Program/inno_sdk/inno_multi_driver_ws/src/inno_multi_lidar_ros/config/fw192sa #
       pcap_file: /home/wenjie/project/pcap/ifw192s/71_2.pcap #The path of pcap file
       extrinsic:
         use_status: true                        #
@@ -42,7 +42,7 @@ lidar:
       max_distance: 200                         #Maximum distance of point cloud
       pcap_repeat: true                         #True--repeat play pcap file
       is_device_load_calibration: false          #True--Use the lidar check param from lidar device
-      calibrate_folder: /home/wenjie/Program/inno_sdk/inno_driver_ws/src/inno_lidar_ros/config/fw192sa #
+      calibrate_folder: /home/wenjie/Program/inno_sdk/inno_multi_driver_ws/src/inno_multi_lidar_ros/config/fw192sa #
       pcap_file: /home/wenjie/project/pcap/ifw192s/71_2.pcap #The path of pcap file
       extrinsic:
         use_status: true                        #
@@ -66,7 +66,7 @@ lidar:
       max_distance: 200                         #Maximum distance of point cloud
       pcap_repeat: true                         #True--repeat play pcap file
       is_device_load_calibration: false          #True--Use the lidar check param from lidar device
-      calibrate_folder: /home/wenjie/Program/inno_sdk/inno_driver_ws/src/inno_lidar_ros/config/fw192sa #
+      calibrate_folder: /home/wenjie/Program/inno_sdk/inno_multi_driver_ws/src/inno_multi_lidar_ros/config/fw192sa #
       pcap_file: /home/wenjie/project/pcap/ifw192s/71_2.pcap #The path of pcap file
       extrinsic:
         use_status: true                        #
@@ -90,7 +90,7 @@ lidar:
       max_distance: 200                         #Maximum distance of point cloud
       pcap_repeat: true                         #True--repeat play pcap file
       is_device_load_calibration: false          #True--Use the lidar check param from lidar device
-      calibrate_folder: /home/wenjie/Program/inno_sdk/inno_driver_ws/src/inno_lidar_ros/config/fw192sa #
+      calibrate_folder: /home/wenjie/Program/inno_sdk/inno_multi_driver_ws/src/inno_multi_lidar_ros/config/fw192sa #
       pcap_file: /home/wenjie/project/pcap/ifw192s/71_2.pcap #The path of pcap file
       extrinsic:
         use_status: true                        #

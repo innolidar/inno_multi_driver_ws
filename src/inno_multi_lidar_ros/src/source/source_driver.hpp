@@ -53,7 +53,7 @@ public:
   typedef std::shared_ptr<SourceDriver> Ptr;
   SourceDriver();
   virtual ~SourceDriver();
-  virtual void Init(SourceType src_type,const YAML::Node& config);
+  virtual void Init(SourceType src_type,const YAML::Node& lidar_config,const YAML::Node& common_config);
   virtual void Start();
   virtual void Stop();
 private:

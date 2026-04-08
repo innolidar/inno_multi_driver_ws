@@ -17,12 +17,13 @@ struct SourceDriver::Impl
     {
 
     }
-    inline void Init(SourceType src_type,const YAML::Node& config)
+    inline void Init(SourceType src_type,const YAML::Node& lidar_config,const YAML::Node& common_config)
     {
-        MultiDriverParam param=MultiDriverParam(config.size());
-        for (uint8_t i = 0; i < config.size(); ++i)
+        //YAML::Node lidar_config = yamlSubNodeAbort(config, "lidar");
+        MultiDriverParam param=MultiDriverParam(lidar_config.size());
+        for (uint8_t i = 0; i < lidar_config.size(); ++i)
         {
-            YAML::Node driver_config = yamlSubNodeAbort(config[i], "driver");
+            YAML::Node driver_config = yamlSubNodeAbort(lidar_config[i], "driver");
             DriverParam &driver_param=param.driver_params[i];
             yamlRead<uint16_t>(driver_config, "cloud_port", driver_param.input_param.local_port, 8080);
             yamlRead<std::string>(driver_config, "local_ip", driver_param.input_param.local_ip, "0.0.0.0");
@@ -76,7 +77,7 @@ struct SourceDriver::Impl
         
         m_publish_manager=std::make_shared<PublishManager>();
         
-        m_publish_manager->Init(config);
+        m_publish_manager->Init(common_config);
     }
 
     inline void Start()
@@ -299,9 +300,9 @@ inline SourceDriver::~SourceDriver()
     m_impl.reset();
     m_impl=nullptr;
 }
-inline void SourceDriver::Init(SourceType src_type,const YAML::Node& config)
+inline void SourceDriver::Init(SourceType src_type,const YAML::Node& lidar_config,const YAML::Node& common_config)
 {
-    m_impl->Init(src_type,config);
+    m_impl->Init(src_type,lidar_config,common_config);
 }
 
 inline void SourceDriver::Start()
