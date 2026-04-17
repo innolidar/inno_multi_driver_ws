@@ -18,13 +18,13 @@ lidar:
       max_distance: 200                         #Maximum distance of point cloud
       pcap_repeat: true                         #True--repeat play pcap file
       is_device_load_calibration: false          #True--Use the lidar check param from lidar device
-      calibrate_folder: /home/wenjie/Program/inno_sdk/inno_multi_driver_ws/src/inno_multi_lidar_ros/config/fw192sa #
+      calibrate_folder: /home/wenjie/Data/project/Program/inno_sdk/inno_multi_driver_ws/src/inno_multi_lidar_ros/config/fw192sa #
       pcap_file: /home/wenjie/project/pcap/ifw192s/71_2.pcap #The path of pcap file
       extrinsic:
         use_status: true                        #
         roll: 0                                 #
         pitch: 0                                #
-        yaw: 0                                  #
+        yaw: 8.5                                  #
         x: 0                                    #
         y: 0                                    #
         z: 0                                    #
@@ -42,13 +42,13 @@ lidar:
       max_distance: 200                         #Maximum distance of point cloud
       pcap_repeat: true                         #True--repeat play pcap file
       is_device_load_calibration: false          #True--Use the lidar check param from lidar device
-      calibrate_folder: /home/wenjie/Program/inno_sdk/inno_multi_driver_ws/src/inno_multi_lidar_ros/config/fw192sa #
+      calibrate_folder: /home/wenjie/Data/project/Program/inno_sdk/inno_multi_driver_ws/src/inno_multi_lidar_ros/config/fw192sa #
       pcap_file: /home/wenjie/project/pcap/ifw192s/71_2.pcap #The path of pcap file
       extrinsic:
         use_status: true                        #
         roll: 0                                 #
-        pitch: 45                                #
-        yaw: 0                                  #
+        pitch: 0                                #
+        yaw: -8.5                                  #
         x: 0                                    #
         y: 0                                    #
         z: 0                                    #
@@ -66,13 +66,13 @@ lidar:
       max_distance: 200                         #Maximum distance of point cloud
       pcap_repeat: true                         #True--repeat play pcap file
       is_device_load_calibration: false          #True--Use the lidar check param from lidar device
-      calibrate_folder: /home/wenjie/Program/inno_sdk/inno_multi_driver_ws/src/inno_multi_lidar_ros/config/fw192sa #
+      calibrate_folder: /home/wenjie/Data/project/Program/inno_sdk/inno_multi_driver_ws/src/inno_multi_lidar_ros/config/fw192sa #
       pcap_file: /home/wenjie/project/pcap/ifw192s/71_2.pcap #The path of pcap file
       extrinsic:
         use_status: true                        #
-        roll: 45                                 #
-        pitch: 0                                #
-        yaw: 0                                  #
+        roll: 0                                 #
+        pitch: 9                                #
+        yaw: 8.5                                  #
         x: 0                                    #
         y: 0                                    #
         z: 0                                    #
@@ -90,13 +90,13 @@ lidar:
       max_distance: 200                         #Maximum distance of point cloud
       pcap_repeat: true                         #True--repeat play pcap file
       is_device_load_calibration: false          #True--Use the lidar check param from lidar device
-      calibrate_folder: /home/wenjie/Program/inno_sdk/inno_multi_driver_ws/src/inno_multi_lidar_ros/config/fw192sa #
+      calibrate_folder: /home/wenjie/Data/project/Program/inno_sdk/inno_multi_driver_ws/src/inno_multi_lidar_ros/config/fw192sa #
       pcap_file: /home/wenjie/project/pcap/ifw192s/71_2.pcap #The path of pcap file
       extrinsic:
         use_status: true                        #
         roll: 0                                 #
-        pitch: 0                                #
-        yaw: 45                                 #
+        pitch: 9                                #
+        yaw: -8.0                                 #
         x: 0                                    #
         y: 0                                    #
         z: 0                                    #
