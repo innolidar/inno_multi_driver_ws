@@ -10,7 +10,7 @@ from PyQt5.QtWidgets import (
 )
 from PyQt5.QtCore import QThread, pyqtSignal
 
-import open3d as o3d
+#import open3d as o3d
 
 SAVE_QUEUE_SIZE = 100
 
@@ -25,22 +25,40 @@ class SaveWorker(QThread):
         self.q = q
         self.running = True
         self.count = 0
-
+    def save_pcd_xyzi(self, filename, points):
+        """
+        points: Nx4 (x, y, z, intensity)
+        """
+        with open(filename, 'w') as f:
+            f.write("# .PCD v0.7 - Point Cloud Data file\n")
+            f.write("VERSION 0.7\n")
+            f.write("FIELDS x y z intensity\n")
+            f.write("SIZE 4 4 4 4\n")
+            f.write("TYPE F F F F\n")
+            f.write("COUNT 1 1 1 1\n")
+            f.write(f"WIDTH {points.shape[0]}\n")
+            f.write("HEIGHT 1\n")
+            f.write("VIEWPOINT 0 0 0 1 0 0 0\n")
+            f.write(f"POINTS {points.shape[0]}\n")
+            f.write("DATA ascii\n")
+            for p in points:
+                f.write(f"{p[0]} {p[1]} {p[2]} {p[3]}\n")
+                
     def run(self):
         while self.running:
             try:
                 cloud = self.q.get(timeout=1)
 
-                pcd = o3d.geometry.PointCloud()
-                pcd.points = o3d.utility.Vector3dVector(cloud)
+                #pcd = o3d.geometry.PointCloud()
+                #pcd.points = o3d.utility.Vector3dVector(cloud)
 
                 filename = os.path.join(
                     self.save_dir,
                     f"cloud_{self.count}_{int(time.time()*1000)}.pcd"
                 )
-
-                o3d.io.write_point_cloud(filename, pcd, write_ascii=False)
-
+                #print(filename)
+                #o3d.io.write_point_cloud(filename, pcd, write_ascii=False)
+                self.save_pcd_xyzi(filename,cloud)
                 self.count += 1
 
                 if self.count % 10 == 0:
@@ -70,14 +88,14 @@ class ROS2Worker(QThread):
         import sensor_msgs_py.point_cloud2 as pc2
 
         rclpy.init()
-        node = Node("qt_ros2_node")
+        node = Node("ros_to_pcd")
 
         def callback(msg):
-            pts = np.array(list(pc2.read_points(msg, skip_nans=True)), dtype=np.float32)
+            pts = np.array(list(pc2.read_points(msg, field_names=('x', 'y', 'z','intensity'),skip_nans=True)), dtype=np.float32)
             if pts.shape[0] == 0:
                 return
 
-            cloud = pts[:, :3]
+            cloud = pts[:, :4]
 
             if not self.q.full():
                 self.q.put(cloud)
@@ -104,20 +122,25 @@ class ROS1Worker(QThread):
         super().__init__()
         self.topic = topic
         self.q = q
+        import rospy
+        from sensor_msgs.msg import PointCloud2
+        import sensor_msgs.point_cloud2 as pc2
+        rospy.init_node("ros_to_pcd", anonymous=True)
 
     def run(self):
         import rospy
         from sensor_msgs.msg import PointCloud2
         import sensor_msgs.point_cloud2 as pc2
-
-        rospy.init_node("qt_ros1_node", anonymous=True)
-
         def callback(msg):
+            #print(msg.fields)
+            #point_count = msg.width * msg.height
+            #rospy.loginfo("Point count: %d", point_count)
+			
             pts = np.array(list(pc2.read_points(msg, skip_nans=True)), dtype=np.float32)
             if pts.shape[0] == 0:
                 return
 
-            cloud = pts[:, :3]
+            cloud = pts[:, :4]
 
             if not self.q.full():
                 self.q.put(cloud)
@@ -168,10 +191,13 @@ class MainWindow(QWidget):
         self.setLayout(layout)
 
         self.q = queue.Queue(maxsize=SAVE_QUEUE_SIZE)
-
+        print(os.path.abspath(__file__))
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        print(current_dir)
+        
         self.save_dir = "pcd_output"
         os.makedirs(self.save_dir, exist_ok=True)
-
+        self.save_dir = os.path.join(current_dir,self.save_dir)
         self.ros_worker = None
         self.save_worker = None
 
