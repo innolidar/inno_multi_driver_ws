@@ -91,10 +91,24 @@ class ROS2Worker(QThread):
         node = Node("ros_to_pcd")
 
         def callback(msg):
-            pts = np.array(list(pc2.read_points(msg, field_names=('x', 'y', 'z','intensity'),skip_nans=True)), dtype=np.float32)
-            if pts.shape[0] == 0:
-                return
-
+            #point_count = msg.width*msg.height
+            #print(f"point_count: {point_count} ")
+            #print(msg.fields)
+            fields = ["x", "y", "z", "intensity"] #, "ring", "timestamp"
+            #pts_gen = pc2.read_points(msg, field_names=fields, skip_nans=True)
+            pts_list = np.array(list(pc2.read_points(msg, field_names=["x", "y", "z", "intensity"], skip_nans=True)))
+            #pts_list = list(pts_gen)
+            x = pts_list['x']
+            y = pts_list['y']
+            z = pts_list['z']
+            i = pts_list['intensity']
+            
+            #pts = np.array(pts_list, dtype=np.float32)
+            pts = np.column_stack((x, y, z, i)).astype(np.float32)
+            #pts = np.array(list(pc2.read_points(msg,field_names=fields,skip_nans=True)), dtype=np.float32)
+            #if pts.shape[0] == 0:
+            #    return
+            #pts = np.array(list(pts_gen), dtype=np.float32)
             cloud = pts[:, :4]
 
             if not self.q.full():
@@ -102,10 +116,10 @@ class ROS2Worker(QThread):
             else:
                 self.log_signal.emit("⚠️ 队列满，丢帧")
 
-        node.create_subscription(PointCloud2, self.topic, callback, 10)
+        node.create_subscription(PointCloud2, self.topic, callback, 100)
 
         while rclpy.ok() and self.running:
-            rclpy.spin_once(node, timeout_sec=0.01)
+            rclpy.spin_once(node, timeout_sec=0.05)
 
         node.destroy_node()
         rclpy.shutdown()
