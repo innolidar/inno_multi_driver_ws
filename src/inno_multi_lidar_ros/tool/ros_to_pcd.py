@@ -32,17 +32,17 @@ class SaveWorker(QThread):
         with open(filename, 'w') as f:
             f.write("# .PCD v0.7 - Point Cloud Data file\n")
             f.write("VERSION 0.7\n")
-            f.write("FIELDS x y z intensity\n")
-            f.write("SIZE 4 4 4 4\n")
-            f.write("TYPE F F F F\n")
-            f.write("COUNT 1 1 1 1\n")
+            f.write("FIELDS x y z intensity timestamp\n")
+            f.write("SIZE 4 4 4 4 4\n")
+            f.write("TYPE F F F F F\n")
+            f.write("COUNT 1 1 1 1 1\n")
             f.write(f"WIDTH {points.shape[0]}\n")
             f.write("HEIGHT 1\n")
             f.write("VIEWPOINT 0 0 0 1 0 0 0\n")
             f.write(f"POINTS {points.shape[0]}\n")
             f.write("DATA ascii\n")
             for p in points:
-                f.write(f"{p[0]} {p[1]} {p[2]} {p[3]}\n")
+                f.write(f"{p[0]} {p[1]} {p[2]} {p[3]} {p[5]}\n")
                 
     def run(self):
         while self.running:
@@ -94,22 +94,24 @@ class ROS2Worker(QThread):
             #point_count = msg.width*msg.height
             #print(f"point_count: {point_count} ")
             #print(msg.fields)
-            fields = ["x", "y", "z", "intensity"] #, "ring", "timestamp"
+            fields = ["x", "y", "z", "intensity","ring","timestamp"] #, "ring", "timestamp"
             #pts_gen = pc2.read_points(msg, field_names=fields, skip_nans=True)
-            pts_list = np.array(list(pc2.read_points(msg, field_names=["x", "y", "z", "intensity"], skip_nans=True)))
+            pts_list = np.array(list(pc2.read_points(msg, field_names=["x", "y", "z", "intensity","ring","timestamp"], skip_nans=True)))
             #pts_list = list(pts_gen)
             x = pts_list['x']
             y = pts_list['y']
             z = pts_list['z']
             i = pts_list['intensity']
+            r = pts_list['ring']
+            t = pts_list['timestamp']
             
             #pts = np.array(pts_list, dtype=np.float32)
-            pts = np.column_stack((x, y, z, i)).astype(np.float32)
+            pts = np.column_stack((x, y, z, i, r, t)).astype(np.float32)
             #pts = np.array(list(pc2.read_points(msg,field_names=fields,skip_nans=True)), dtype=np.float32)
             #if pts.shape[0] == 0:
             #    return
             #pts = np.array(list(pts_gen), dtype=np.float32)
-            cloud = pts[:, :4]
+            cloud = pts[:, :5]
 
             if not self.q.full():
                 self.q.put(cloud)
@@ -150,11 +152,11 @@ class ROS1Worker(QThread):
             #point_count = msg.width * msg.height
             #rospy.loginfo("Point count: %d", point_count)
 			
-            pts = np.array(list(pc2.read_points(msg, skip_nans=True)), dtype=np.float32)
+            pts = np.array(list(pc2.read_points(msg, field_names=("x", "y", "z", "intensity", "ring", "timestamp"),skip_nans=True))) #, dtype=np.float32
             if pts.shape[0] == 0:
                 return
 
-            cloud = pts[:, :4]
+            cloud = pts[:, :6]
 
             if not self.q.full():
                 self.q.put(cloud)
