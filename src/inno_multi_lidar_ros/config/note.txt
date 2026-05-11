@@ -1,0 +1,5 @@
+config_device_1.yaml 是设备1的配置文件
+config_device_2.yaml 是设备2的配置文件
+config_device_3.yaml 是设备3的配置文件
+
+想要看哪台设备，将config_device_xxx.yaml配置文件替换为config.yaml，并修改好正确加载矫正文件路径。
