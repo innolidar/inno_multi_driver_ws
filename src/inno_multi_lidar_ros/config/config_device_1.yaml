@@ -80,7 +80,7 @@ lidar:
   - driver:
       lidar_type: IFW192S                       #LiDAR type - IFW192S FW192SB
       point_type: 0                             #point cloud type 0(x,y,z,intensity,ring) 1(x,y,z,intensity,ring,time)
-      cloud_port: 8080                          #cloud port of lidar (pc port)
+      cloud_port: 8040                          #cloud port of lidar (pc port)
       check_lidar_ip: 192.168.1.80              #check param of lidar device UDP (lidar ip)
       h_start_angle: -360                       #herizon Start angle of point cloud
       h_end_angle: 360                          #herizon End angle of point cloud 
