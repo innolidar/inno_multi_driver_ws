@@ -23,7 +23,7 @@ lidar:
       extrinsic:
         use_status: true                        #
         roll: 0                                 #
-        pitch: 0                                #
+        pitch: -3.5                                #
         yaw: 7.25                                  #
         x: 0                                    #
         y: 0                                    #
@@ -47,7 +47,7 @@ lidar:
       extrinsic:
         use_status: true                        #
         roll: 0                                 #
-        pitch: 0.0                                #
+        pitch: -3.5                                #
         yaw: -7.25                                  #
         x: 0                                    #
         y: 0                                    #
@@ -71,7 +71,7 @@ lidar:
       extrinsic:
         use_status: true                        #
         roll: 0                                 #
-        pitch: 8.25                                #
+        pitch: 4.75                                #
         yaw: 7.25                                  #
         x: 0                                    #
         y: 0                                    #
@@ -95,7 +95,7 @@ lidar:
       extrinsic:
         use_status: true                        #
         roll: 0                                 #
-        pitch: 8.00                                #
+        pitch: 4.5                                #
         yaw: -7.25                                 #
         x: 0                                    #
         y: 0                                    #
