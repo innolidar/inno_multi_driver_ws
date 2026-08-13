@@ -23,8 +23,8 @@ lidar:
       extrinsic:
         use_status: true                        #
         roll: 0                                 #
-        pitch: 8.25                                #
-        yaw: -7.0                                  #
+        pitch: -1.95                                #
+        yaw: 7.25                                  #
         x: 0                                    #
         y: 0                                    #
         z: 0                                    #
@@ -47,8 +47,8 @@ lidar:
       extrinsic:
         use_status: true                        #
         roll: 0                                 #
-        pitch: 8.65                                #
-        yaw: 6.75                                  #
+        pitch: -1.98                                #
+        yaw: -7.90                                  #
         x: 0                                    #
         y: 0                                    #
         z: 0                                    #
@@ -71,8 +71,8 @@ lidar:
       extrinsic:
         use_status: true                        #
         roll: 0                                 #
-        pitch: 0                                #
-        yaw: -7.25                                  #
+        pitch: 6.75                                #
+        yaw: 7.60                                  #
         x: 0                                    #
         y: 0                                    #
         z: 0                                    #
@@ -95,8 +95,8 @@ lidar:
       extrinsic:
         use_status: true                        #
         roll: 0                                 #
-        pitch: 0.15                                #
-        yaw: 7.20                                 #
+        pitch: 6.25                                #
+        yaw: -6.60                                 #
         x: 0                                    #
         y: 0                                    #
         z: 0                                    #
