@@ -13,7 +13,7 @@ set(POINT_TYPE XYZI_TIME)
 #=======================================
 # Compile setup (ORIGINAL, CATKIN, COLCON)
 #=======================================
-set(COMPILE_METHOD COLCON)
+set(COMPILE_METHOD CATKIN)
 set(CMAKE_C_STANDARD 99)
 if(COMPILE_METHOD STREQUAL "COLCON")
 option(ENABLE_ROS1 "Enable ROS1" OFF)
