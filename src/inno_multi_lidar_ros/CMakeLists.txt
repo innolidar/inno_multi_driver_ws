@@ -50,9 +50,11 @@ endif()
 link_directories("${LIB_DIR}/${SYS_FRAMEWORK}")
 if($ENV{ROS_DISTRO} STREQUAL "humble" OR $ENV{ROS_DISTRO} STREQUAL "jazzy")
 #if($ENV{ROS_DISTRO} STREQUAL "humble")  # the ros2 humble requires c++17
-add_definitions(-std=c++17)
+#add_definitions(-std=c++17)
+set(CMAKE_CXX_STANDARD 17)
 else()
-add_definitions(-std=c++14)
+#add_definitions(-std=c++14)
+set(CMAKE_CXX_STANDARD 17)
 endif()
 
 add_compile_options(-Wall)
